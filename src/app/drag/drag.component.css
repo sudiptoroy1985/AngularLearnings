@@ -1,8 +1,5 @@
 .dragg{
-    background: cyan;
-    padding: 10px;
-    border: 1px solid gray;
-    width:500px;
+    width:300px;
     margin-bottom: 5px;
 }
 
@@ -12,10 +9,11 @@
 }
 
 .dock{
-    background: lightblue;
-    display: inline-block;
-    width:250px;
-    height: 200px;
+    display: table-caption;
+    width:auto;
+    border:1px solid lightblue;
+    min-width: 500px;
+    min-height: auto;
+    height: auto;
     padding: 50px;
-    border: 1px solid gray;
 }
