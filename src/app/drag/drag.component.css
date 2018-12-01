@@ -1,16 +1,19 @@
 .dragg{
     background: cyan;
-    display: flex;
-    justify-items:left;
     padding: 10px;
     border: 1px solid gray;
-    width:100px;
+    width:500px;
+    margin-bottom: 5px;
+}
+
+.dragg-list{
+    display: inline-block;
+    margin:10px;
 }
 
 .dock{
     background: lightblue;
-    display: flex;
-    justify-items: right;
+    display: inline-block;
     width:250px;
     height: 200px;
     padding: 50px;
