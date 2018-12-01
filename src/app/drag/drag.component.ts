@@ -7,8 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DragComponent implements OnInit {
 
-  count: number = 10;
-
   items: item[] = [];
 
   constructor() { }
@@ -23,34 +21,33 @@ export class DragComponent implements OnInit {
 
   }
 
-  allowDrop(ev) {
-    ev.currentTarget.style.background = "lightblue";
+  overDrop(ev) {
+    ev.currentTarget.setAttribute('class','dock hoverDock');
     ev.preventDefault();
   }
 
   leaveDrop(ev){
-    ev.currentTarget.style.background = "white";
+    ev.currentTarget.setAttribute('class','dock stableDock');
     ev.preventDefault();
   }
 
-
-
   drag(ev) {
-    ev.effectAllowed = "copyMove";
     ev.dataTransfer.setData("text", ev.target.id);
   }
 
   drop(ev,el) {
-    ev.dataTransfer.dropEffect = "link";
-    ev.currentTarget.style.background = "white";
     var data = ev.dataTransfer.getData("text");
     var newNode = document.getElementById(data);
     for (var existingNode of el.getElementsByClassName('dragg')) {
-       if(existingNode.id === newNode.id)
+       if(existingNode.id === newNode.id){
+         console.log(ev.currentTarget);
+         ev.currentTarget.setAttribute('class','dock erroredDock');
        return;
+       }
      }
     var clonedNode = newNode.cloneNode(true);
     el.appendChild(clonedNode);
+    ev.currentTarget.setAttribute('class','dock stableDock');
   }
 
 }

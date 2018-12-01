@@ -4,8 +4,20 @@
 }
 
 .dragg-list{
-    display: inline-block;
+    position: absolute;
+    left: 0px;
     margin:10px;
+}
+
+.dragg-dock{
+    position: absolute;
+    right: 0;
+    margin: 10px;
+}
+
+.container{
+    max-width: 850px;
+    position: relative;
 }
 
 .dock{
@@ -16,4 +28,16 @@
     min-height: auto;
     height: auto;
     padding: 50px;
+}
+
+.erroredDock{
+    border: 1px dashed red !important;
+}
+
+.stableDock{
+    background: #fff
+}
+
+.hoverDock{
+    background: lightblue;
 }

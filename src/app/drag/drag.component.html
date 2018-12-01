@@ -1,15 +1,20 @@
-<section class="dragg-list">
-  <div class="dragg alert alert-primary" id="{{item.id}}" draggable="true" (dragstart)="drag($event)" *ngFor="let item of items">
-    <strong>{{item.name}}</strong>
-    Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
- </div>
+<section class="container">
+  <section class="dragg-list">
+    <div class="dragg alert alert-primary" id="{{item.id}}" draggable="true" (dragstart)="drag($event)" *ngFor="let item of items">
+      <strong>{{item.name}}</strong>
+      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+    </div>
+  </section>
+
+  <section class="dragg-dock">
+    <div class="dock alert alert-light" #dock1 id="drop1" (drop)="drop($event, dock1)" (dragover)="overDrop($event, dock1)"
+      (dragleave)="leaveDrop($event, dock1)">
+      <h4 class="alert-heading">Aisle</h4>
+    </div>
+
+    <div class="dock alert alert-light" #dock2 id="drop2" (drop)="drop($event, dock2)" (dragover)="overDrop($event)"
+      (dragleave)="leaveDrop($event)">
+      <h4 class="alert-heading">Dry Foods</h4>
+    </div>
+  </section>
 </section>
-
-
-<div class="dock alert alert-light" #dock1 id="drop1" (drop)="drop($event, dock1)" (dragover)="allowDrop($event)" (dragleave)="leaveDrop($event)">
-  <h4 class="alert-heading">Aisle</h4>
-</div>
-
-<div class="dock alert alert-light" #dock2 id="drop2" (drop)="drop($event, dock2)" (dragover)="allowDrop($event)" (dragleave)="leaveDrop($event)">
-  <h4 class="alert-heading">Dry Foods</h4>
-</div>
