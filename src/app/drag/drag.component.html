@@ -1,0 +1,25 @@
+
+
+<div class="dragg" id="drag1"  draggable="true" (dragstart)="drag($event)">
+  drop me
+</div>
+<div class="dragg" id="drag2"  draggable="true" (dragstart)="drag($event)">
+  drop me
+</div>
+<div class="dragg" id="drag3"  draggable="true" (dragstart)="drag($event)">
+  drop me
+</div>
+<div class="dragg" id="drag4"  draggable="true" (dragstart)="drag($event)">
+  drop me
+</div>
+<div class="dragg" id="drag5"  draggable="true" (dragstart)="drag($event)">
+  drop me
+</div>
+<div class="dragg" id="drag6"  draggable="true" (dragstart)="drag($event)">
+  drop me
+</div>
+
+
+<div class="dock" #dock id="drop" (drop)="drop($event, dock)" (dragover)="allowDrop($event)">
+  drop here
+</div>
