@@ -1,6 +1,6 @@
 import { ItemService } from './../item.service';
 import { Subscription } from 'rxjs';
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Dropitem, ListItem } from './Dropitem';
 
 @Component({
@@ -8,7 +8,7 @@ import { Dropitem, ListItem } from './Dropitem';
   templateUrl: './drop.component.html',
   styleUrls: ['./drop.component.css']
 })
-export class DropComponent implements OnInit {
+export class DropComponent implements OnInit, OnDestroy {
 
   Drops: Dropitem[] = [];
 
@@ -20,8 +20,10 @@ export class DropComponent implements OnInit {
   constructor(private ItemService: ItemService) {
     this.subscription = ItemService.itemAdded$.subscribe(
       item => {
-        console.log(item);
-        this.selectedDropItem.list.push(item);
+        const dropItem = this.selectedDropItem;
+        if (!dropItem.list.find(p => p.id === item.id)) {
+          dropItem.list.push(item);
+        }
     });
    }
 
@@ -33,7 +35,10 @@ export class DropComponent implements OnInit {
 
   setCurrentDropItemEvent(item) {
     this.selectedDropItem = this.Drops.find(p => p.id === item.id);
-    console.log(this.selectedDropItem);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 
