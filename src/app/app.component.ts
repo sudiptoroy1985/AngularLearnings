@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Dropitem, ListItem } from './drop/Dropitem';
+import { Subscription } from 'rxjs';
+import { ItemService } from './item.service';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +11,18 @@ import { Dropitem, ListItem } from './drop/Dropitem';
 export class AppComponent {
   title = 'dragAndDrop';
 
+  subscription: Subscription;
+
+  // tslint:disable-next-line:no-shadowed-variable
+  constructor(private ItemService: ItemService) {
+
+  }
+
+
   selectedListItem: ListItem;
 
   addListItem(item) {
-    this.selectedListItem = item;
+    this.ItemService.addItem(item);
   }
 
 }

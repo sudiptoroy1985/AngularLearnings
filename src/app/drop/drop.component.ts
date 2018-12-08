@@ -1,3 +1,5 @@
+import { ItemService } from './../item.service';
+import { Subscription } from 'rxjs';
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Dropitem, ListItem } from './Dropitem';
 
@@ -6,16 +8,22 @@ import { Dropitem, ListItem } from './Dropitem';
   templateUrl: './drop.component.html',
   styleUrls: ['./drop.component.css']
 })
-export class DropComponent implements OnInit, OnChanges {
+export class DropComponent implements OnInit {
 
   Drops: Dropitem[] = [];
 
   selectedDropItem: Dropitem;
 
-  @Input()
-  selectedListItem: ListItem;
+  subscription: Subscription;
 
-  constructor() { }
+  // tslint:disable-next-line:no-shadowed-variable
+  constructor(private ItemService: ItemService) {
+    this.subscription = ItemService.itemAdded$.subscribe(
+      item => {
+        console.log(item);
+        this.selectedDropItem.list.push(item);
+    });
+   }
 
   ngOnInit() {
     this.Drops.push({id: 1, name: 'dry Aisle', list: []});
@@ -25,15 +33,10 @@ export class DropComponent implements OnInit, OnChanges {
 
   setCurrentDropItemEvent(item) {
     this.selectedDropItem = this.Drops.find(p => p.id === item.id);
+    console.log(this.selectedDropItem);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (this.selectedDropItem) {
-       this.selectedDropItem.list.push(changes.selectedListItem.currentValue);
-      console.log(this.selectedDropItem);
-    }
 
-  }
 
 
 

@@ -1,19 +1,19 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
-import {Dropitem} from './drop/Dropitem';
+import { ListItem } from './drop/Dropitem';
 
 @Injectable()
 export class ItemService {
 
   // Observable string sources
-  private itemAdded = new Subject < Dropitem > ();
+  private itemAdded = new Subject<ListItem>();
 
   // Observable string streams
-  itemAdded$ = this
-    .itemAdded
-    .asObservable();
+  itemAdded$ = this.itemAdded.asObservable();
 
-  // Service message commands addItem(item: string) {
-  // this.missionAnnouncedSource.next(mission); } confirmMission(astronaut:
-  // string) {   this.missionConfirmedSource.next(astronaut); }
+  // Service message commands
+  addItem(item: ListItem) {
+    this.itemAdded.next(item);
+}
+
 }
