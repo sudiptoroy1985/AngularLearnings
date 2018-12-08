@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ListItem } from '../drop/Dropitem';
+import { ItemService } from '../item.service';
 
 @Component({
   selector: 'app-drag',
@@ -13,7 +14,7 @@ export class DragComponent implements OnInit {
   @Output()
   addListItemEvnt: EventEmitter<ListItem> = new EventEmitter();
 
-  constructor() { }
+  constructor(private itemService: ItemService) { }
 
   ngOnInit() {
     this.items.push({ itemName: 'first', id: 1 });
@@ -27,7 +28,7 @@ export class DragComponent implements OnInit {
 
   // tslint:disable-next-line:no-shadowed-variable
   addPromotion(item: ListItem) {
-     this.addListItemEvnt.next(item);
+    this.itemService.addItem(item);
   }
 
 }

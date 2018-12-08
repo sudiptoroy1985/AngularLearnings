@@ -11,18 +11,7 @@ import { ItemService } from './item.service';
 export class AppComponent {
   title = 'dragAndDrop';
 
-  subscription: Subscription;
-
-  // tslint:disable-next-line:no-shadowed-variable
-  constructor(private ItemService: ItemService) {
-
-  }
-
-
-  selectedListItem: ListItem;
-
-  addListItem(item) {
-    this.ItemService.addItem(item);
+  constructor() {
   }
 
 }
