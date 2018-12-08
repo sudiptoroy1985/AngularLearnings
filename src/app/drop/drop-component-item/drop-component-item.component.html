@@ -1,0 +1,6 @@
+<div class="dock alert alert-light" (click)="setCurrentDropItem(dropItem)">
+  <h4>{{dropItem.name}}</h4>
+  <div *ngFor="let listItem of dropItem.list">
+    {{listItem.itemName}}
+  </div>
+</div>

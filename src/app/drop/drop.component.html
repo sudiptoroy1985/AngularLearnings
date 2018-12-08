@@ -1,0 +1,8 @@
+
+<div class="dragg-dock">
+  <div *ngFor="let drop of Drops">
+    <app-drop-component-item (setCurrentDropItemEvent)="setCurrentDropItemEvent($event)" [dropItem]="drop"></app-drop-component-item>
+  </div>
+</div>
+
+

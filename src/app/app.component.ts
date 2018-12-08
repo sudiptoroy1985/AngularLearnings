@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Dropitem, ListItem } from './drop/Dropitem';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'dragAndDrop';
+
+  selectedListItem: ListItem;
+
+  addListItem(item) {
+    this.selectedListItem = item;
+  }
 
 }

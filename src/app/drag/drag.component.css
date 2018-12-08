@@ -1,5 +1,5 @@
 .dragg{
-    width:300px;
+    width:500px;
     margin-bottom: 5px;
 }
 
@@ -15,29 +15,14 @@
     margin: 10px;
 }
 
-.container{
-    max-width: 850px;
-    position: relative;
+.promo-add-btn{
+    border-radius: 50%;
+    color: #fff;
+    background: indigo;
+    border: 0;
+    float: right;
+    cursor: pointer;
 }
 
-.dock{
-    display: table-caption;
-    width:auto;
-    border:1px solid lightblue;
-    min-width: 500px;
-    min-height: auto;
-    height: auto;
-    padding: 50px;
-}
 
-.erroredDock{
-    border: 1px dashed red !important;
-}
 
-.stableDock{
-    background: #fff
-}
-
-.hoverDock{
-    background: lightblue;
-}

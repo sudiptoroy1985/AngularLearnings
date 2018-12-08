@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ListItem } from '../drop/Dropitem';
 
 @Component({
   selector: 'app-drag',
@@ -7,52 +8,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DragComponent implements OnInit {
 
-  items: item[] = [];
+  items: ListItem[] = [];
+
+  @Output()
+  addListItemEvnt: EventEmitter<ListItem> = new EventEmitter();
 
   constructor() { }
 
   ngOnInit() {
-    this.items.push({name:"first",id:1})
-    this.items.push({name:"second",id:2})
-    this.items.push({name:"third",id:3})
-    this.items.push({name:"fourth",id:4})
-    this.items.push({name:"fifth",id:5})
-    this.items.push({name:"sixth",id:6})
+    this.items.push({ itemName: 'first', id: 1 });
+    this.items.push({ itemName: 'second', id: 2 });
+    this.items.push({ itemName: 'third', id: 3 });
+    this.items.push({ itemName: 'fourth', id: 4 });
+    this.items.push({ itemName: 'fifth', id: 5 });
+    this.items.push({ itemName: 'sixth', id: 6 });
 
   }
 
-  overDrop(ev) {
-    ev.currentTarget.setAttribute('class','dock hoverDock');
-    ev.preventDefault();
-  }
-
-  leaveDrop(ev){
-    ev.currentTarget.setAttribute('class','dock stableDock');
-    ev.preventDefault();
-  }
-
-  drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-  }
-
-  drop(ev,el) {
-    var data = ev.dataTransfer.getData("text");
-    var newNode = document.getElementById(data);
-    for (var existingNode of el.getElementsByClassName('dragg')) {
-       if(existingNode.id === newNode.id){
-         console.log(ev.currentTarget);
-         ev.currentTarget.setAttribute('class','dock erroredDock');
-       return;
-       }
-     }
-    var clonedNode = newNode.cloneNode(true);
-    el.appendChild(clonedNode);
-    ev.currentTarget.setAttribute('class','dock stableDock');
+  // tslint:disable-next-line:no-shadowed-variable
+  addPromotion(item: ListItem) {
+     this.addListItemEvnt.next(item);
   }
 
 }
 
-interface item{
-  name: string,
-  id: number,
-}
+

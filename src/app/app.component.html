@@ -1,3 +1,4 @@
-
-
-<app-drag></app-drag>
+<section class="container">
+    <app-drag (addListItemEvnt)="addListItem($event)"></app-drag>
+    <app-drop [selectedListItem]="selectedListItem"></app-drop>
+</section>
