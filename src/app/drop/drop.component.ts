@@ -1,7 +1,8 @@
+import { DropItemSelectionService } from './../drop-item-selection.service';
 import { ItemService } from './../item.service';
 import { Subscription } from 'rxjs';
-import { Component, OnInit, Input, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
-import { Dropitem, ListItem } from './Dropitem';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Dropitem } from './Dropitem';
 
 @Component({
   selector: 'app-drop',
@@ -14,18 +15,30 @@ export class DropComponent implements OnInit, OnDestroy {
 
   selectedDropItem: Dropitem;
 
-  subscription: Subscription;
+  listItemSubscription: Subscription;
+
+  dropItemSubscription: Subscription;
 
   // tslint:disable-next-line:no-shadowed-variable
-  constructor(private ItemService: ItemService) {
-    this.subscription = ItemService.itemAdded$.subscribe(
-      item => {
-        const dropItem = this.selectedDropItem;
-        if (!dropItem.list.find(p => p.id === item.id)) {
-          dropItem.list.push(item);
-        }
-    });
+  constructor(private ItemService: ItemService, private DropItemSelectionService: DropItemSelectionService) {
+    this.subscribeToListItemSet(ItemService);
+    this.subscribeToDropItemSet(DropItemSelectionService);
    }
+
+  private subscribeToDropItemSet(dropItemSelectionService) {
+    this.dropItemSubscription = dropItemSelectionService.dropItemSelected$.subscribe(dropItem => {
+      this.selectedDropItem = this.Drops.find(p => p.id === dropItem.id);
+    });
+  }
+
+  private subscribeToListItemSet(itemService) {
+    this.listItemSubscription = itemService.itemAdded$.subscribe(item => {
+      const dropItem = this.selectedDropItem;
+      if (dropItem && !dropItem.list.find(p => p.id === item.id)) {
+        dropItem.list.push(item);
+      }
+    });
+  }
 
   ngOnInit() {
     this.Drops.push({id: 1, name: 'dry Aisle', list: []});
@@ -33,12 +46,9 @@ export class DropComponent implements OnInit, OnDestroy {
     this.Drops.push({id: 3, name: 'Trifecta', list: []});
   }
 
-  setCurrentDropItemEvent(item) {
-    this.selectedDropItem = this.Drops.find(p => p.id === item.id);
-  }
-
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.listItemSubscription.unsubscribe();
+    this.dropItemSubscription.unsubscribe();
   }
 
 

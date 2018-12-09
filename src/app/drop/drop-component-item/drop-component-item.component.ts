@@ -1,3 +1,4 @@
+import { DropItemSelectionService } from './../../drop-item-selection.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Dropitem } from '../Dropitem';
 
@@ -11,16 +12,14 @@ export class DropComponentItemComponent implements OnInit {
   @Input()
   dropItem: Dropitem;
 
-  @Output()
-  setCurrentDropItemEvent: EventEmitter<Dropitem> = new EventEmitter();
 
-  constructor() { }
+  constructor(private dropItemSelectionService: DropItemSelectionService) { }
 
   ngOnInit() {
   }
 
   setCurrentDropItem(dropitem) {
-    this.setCurrentDropItemEvent.next(dropitem);
+    this.dropItemSelectionService.setDropItem(dropitem);
   }
 
 }
